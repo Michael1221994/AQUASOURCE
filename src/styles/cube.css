@@ -1,0 +1,53 @@
+.cube-container {
+  perspective: 1200px;
+  perspective-origin: center;
+  width: var(--cube-depth, 56px);
+  height: var(--cube-depth, 56px);
+}
+
+.cube-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass);
+}
+
+.cube-face--front { transform: translateZ(calc(var(--cube-depth) / 2)); }
+.cube-face--back { transform: rotateY(180deg) translateZ(calc(var(--cube-depth) / 2)); }
+.cube-face--top { transform: rotateX(90deg) translateZ(calc(var(--cube-depth) / 2)); }
+.cube-face--bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-depth) / 2)); }
+.cube-face--left { transform: rotateY(-90deg) translateZ(calc(var(--cube-depth) / 2)); }
+.cube-face--right { transform: rotateY(90deg) translateZ(calc(var(--cube-depth) / 2)); }
+
+.cube-container:hover .cube-wrapper {
+  transform: rotateX(-90deg);
+}
+
+.cube-container.is-active .cube-wrapper {
+  transform: rotateY(180deg);
+}
+
+/* Variants */
+.cube--sm { --cube-depth: 48px; }
+.cube--md { --cube-depth: 56px; }
+.cube--lg { --cube-depth: 64px; }
+
+/* Mode Colors */
+body.mode-crisis .cube-face {
+  border-color: rgba(255, 107, 0, 0.3);
+}
+body.mode-impact .cube-face {
+  border-color: rgba(0, 229, 255, 0.3);
+}

@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glacial: #00e5ff;
+  --color-deep-ocean: #001e2b;
+  --color-obsidian: #0a0a0a;
+  --color-crisis-amber: #ff6b00;
+  --color-crisis-red: #ff1744;
+  --color-impact-cyan: #00e5ff;
+  --color-impact-green: #00e676;
+  --color-pure-white: #f5f5f5;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: default;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-pure-white);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background-color: var(--color-glacial);
+  color: var(--color-deep-ocean);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Glassmorphism */
+.glass {
+  backdrop-filter: blur(20px);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* Typography */
+.t-display {
+  font-size: 8rem;
+  font-family: var(--font-display);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+@media (min-width: 1024px) {
+    .t-display {
+        font-size: 10rem;
+    }
+}
+.t-headline {
+  font-size: 3rem;
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+.t-title {
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+  line-height: 1.3;
+}
+.t-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.t-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+}
+.t-stat-number {
+  font-size: 6rem;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+/* Section */
+.chapter {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Animations */
+.reveal-text {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-text.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-children > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { transition-delay: 0.6s; }
+
+/* Loading */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--color-obsidian);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease;
+}
+
+/* Modes */
+:root {
+  --accent-color: var(--color-glacial);
+}
+body.mode-crisis {
+  --accent-color: var(--color-crisis-amber);
+}
+body.mode-impact {
+  --accent-color: var(--color-impact-cyan);
+}
