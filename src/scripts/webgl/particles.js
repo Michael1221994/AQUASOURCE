@@ -25,11 +25,11 @@ export class ParticleSystem {
       depthTest: false,
     });
 
-    // Layer 1: Ambient floating moisture field (1,500 particles, sizes 6.0 to 14.0)
-    this.createLayer(1500, 6.0, 14.0, 95, 95, 45, -8.0);
+    // Layer 1: Ambient floating moisture field (600 particles, sizes 4.0 to 10.0)
+    this.createLayer(600, 4.0, 10.0, 110, 110, 50, -10.0);
 
-    // Layer 2: Large prominent radiant water droplets (450 droplets, sizes 24.0 to 56.0)
-    this.createLayer(450, 24.0, 56.0, 80, 80, 30, -3.0);
+    // Layer 2: Luminous water droplets (120 droplets, sizes 14.0 to 28.0)
+    this.createLayer(120, 14.0, 28.0, 90, 90, 35, -5.0);
   }
 
   createLayer(count, minSize, maxSize, spreadX, spreadY, spreadZ, offsetZ) {
