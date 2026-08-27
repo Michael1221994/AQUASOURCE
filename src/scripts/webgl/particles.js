@@ -21,17 +21,18 @@ export class ParticleSystem {
       uniforms: this.uniforms,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      depthWrite: false
+      depthWrite: false,
+      depthTest: false
     });
 
-    // Layer 1: Ambient floating moisture particles (1,500 count, size 3 to 9)
-    this.createLayer(1500, 3.0, 9.0, 90, 90, 45);
+    // Layer 1: Ambient floating moisture field (1,800 particles, sizes 4.0 to 12.0)
+    this.createLayer(1800, 4.0, 12.0, 95, 95, 50, -10.0);
 
-    // Layer 2: Large luminous water droplets (350 count, size 16 to 38)
-    this.createLayer(350, 16.0, 38.0, 75, 75, 30);
+    // Layer 2: Large prominent bokeh water droplets (400 droplets, sizes 18.0 to 48.0)
+    this.createLayer(400, 18.0, 48.0, 80, 80, 35, -5.0);
   }
 
-  createLayer(count, minSize, maxSize, spreadX, spreadY, spreadZ) {
+  createLayer(count, minSize, maxSize, spreadX, spreadY, spreadZ, offsetZ) {
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const randoms = new Float32Array(count);
@@ -40,7 +41,7 @@ export class ParticleSystem {
     for (let i = 0; i < count; i++) {
       positions[i * 3 + 0] = (Math.random() - 0.5) * spreadX;
       positions[i * 3 + 1] = (Math.random() - 0.5) * spreadY;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * spreadZ - 10.0;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * spreadZ + offsetZ;
 
       randoms[i] = Math.random();
       sizes[i] = minSize + Math.random() * (maxSize - minSize);
@@ -51,6 +52,7 @@ export class ParticleSystem {
     geometry.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
 
     const points = new THREE.Points(geometry, this.material);
+    points.renderOrder = 10;
     this.container.add(points);
   }
 
@@ -61,8 +63,8 @@ export class ParticleSystem {
     // Smooth responsive mouse interpolation
     const targetX = Math.max(-1.5, Math.min(1.5, mouseX));
     const targetY = Math.max(-1.5, Math.min(1.5, mouseY));
-    this.uniforms.uMouse.value.x += (targetX - this.uniforms.uMouse.value.x) * 0.06;
-    this.uniforms.uMouse.value.y += (targetY - this.uniforms.uMouse.value.y) * 0.06;
+    this.uniforms.uMouse.value.x += (targetX - this.uniforms.uMouse.value.x) * 0.08;
+    this.uniforms.uMouse.value.y += (targetY - this.uniforms.uMouse.value.y) * 0.08;
 
     // Smooth mode color transition
     const currentMode = this.uniforms.uMode.value;
