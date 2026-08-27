@@ -17,28 +17,28 @@ export const waterParticleVertexShader = `
     vec3 pos = position;
     vRandom = aRandom;
 
-    // Floating vertical motion: rises upward in impact mode, settles down in crisis mode
+    // Upward moisture floating in impact mode, downward settlement in crisis mode
     float direction = mix(-1.0, 1.0, uMode);
-    float speed = aRandom * 0.45 + 0.18;
+    float speed = aRandom * 0.4 + 0.15;
 
     pos.y += uTime * speed * direction;
     pos.y = mod(pos.y + 60.0, 120.0) - 60.0;
 
-    // Organic liquid undulation waves
-    pos.x += sin(pos.y * 0.05 + uTime * 0.5 + aRandom * 6.28) * 3.0;
-    pos.z += cos(pos.x * 0.05 + uTime * 0.4 + aRandom * 6.28) * 2.0;
+    // Fluid undulation
+    pos.x += sin(pos.y * 0.06 + uTime * 0.4 + aRandom * 6.28) * 2.5;
+    pos.z += cos(pos.x * 0.06 + uTime * 0.3 + aRandom * 6.28) * 2.0;
 
-    // Dynamic mouse repulsion wave (droplets actively part around the cursor)
+    // Active fluid mouse repulsion wave
     vec2 mouseWorld = uMouse * vec2(40.0, 30.0);
     vec2 diff = pos.xy - mouseWorld;
     float dist = length(diff) + 0.001;
-    float radius = 28.0;
+    float radius = 30.0;
     if (dist < radius) {
-      float force = (1.0 - dist / radius);
-      pos.xy += (diff / dist) * (force * force * 10.0);
+      float force = 1.0 - (dist / radius);
+      pos.xy += (diff / dist) * (force * force * 12.0);
     }
 
-    // Scroll parallax interaction
+    // Scroll parallax
     pos.y += uScrollProgress * 8.0;
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
@@ -47,8 +47,8 @@ export const waterParticleVertexShader = `
     // Large, prominent point sizes for droplets
     gl_PointSize = aSize * (360.0 / depth);
 
-    // Stable distance fade
-    vAlpha = clamp(1.0 - (depth - 5.0) / 70.0, 0.4, 1.0);
+    // Distance fade (clamp between 0.4 and 1.0)
+    vAlpha = clamp(1.0 - (depth - 5.0) / 75.0, 0.4, 1.0);
 
     gl_Position = projectionMatrix * mvPosition;
   }
@@ -57,25 +57,32 @@ export const waterParticleVertexShader = `
 export const waterParticleFragmentShader = `
   precision mediump float;
 
-  uniform sampler2D tDroplet;
   uniform float uMode;
 
   varying float vAlpha;
   varying float vRandom;
 
   void main() {
-    vec4 texColor = texture2D(tDroplet, gl_PointCoord);
-    if (texColor.a < 0.01) discard;
+    vec2 center = gl_PointCoord - vec2(0.5);
+    float dist = length(center);
+    if (dist > 0.5) discard;
 
-    // Vibrant Glacial Cyan (#00f0ff) for impact vs Radiant Solar Amber (#ff7700) for crisis
+    // Pure procedural glowing droplet equation (zero texture dependencies, 100% reliable)
+    float core = 1.0 - smoothstep(0.0, 0.25, dist);
+    float body = 1.0 - smoothstep(0.1, 0.50, dist);
+    float glow = exp(-dist * 3.5);
+
+    float alpha = clamp((core * 0.6 + body * 0.4 + glow * 0.3) * vAlpha, 0.0, 1.0);
+
+    // Luminous Glacial Cyan (#00f0ff) for impact vs Radiant Solar Amber (#ff7700) for crisis
     vec3 impactColor = vec3(0.0, 0.94, 1.0);
     vec3 crisisColor = vec3(1.0, 0.48, 0.05);
     vec3 baseColor = mix(crisisColor, impactColor, uMode);
 
-    // Tint texture with mode color while preserving bright specular white center
-    vec3 finalColor = mix(baseColor * texColor.rgb, vec3(1.0, 1.0, 1.0), texColor.r * 0.7);
+    // Bright specular liquid white highlight in center
+    vec3 finalColor = mix(baseColor, vec3(1.0, 1.0, 1.0), core * 0.85);
 
-    gl_FragColor = vec4(finalColor, texColor.a * vAlpha);
+    gl_FragColor = vec4(finalColor, alpha);
   }
 `;
 

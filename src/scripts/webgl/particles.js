@@ -2,42 +2,15 @@
 import * as THREE from 'three';
 import { waterParticleVertexShader, waterParticleFragmentShader } from './shaders.js';
 
-/**
- * Creates a soft glowing radial water droplet texture on an offscreen canvas
- */
-function createDropletTexture() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 64;
-  canvas.height = 64;
-  const ctx = canvas.getContext('2d');
-
-  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-  gradient.addColorStop(0.2, 'rgba(0, 240, 255, 0.95)');
-  gradient.addColorStop(0.5, 'rgba(0, 180, 255, 0.5)');
-  gradient.addColorStop(0.75, 'rgba(0, 120, 255, 0.2)');
-  gradient.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
-
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 64, 64);
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.needsUpdate = true;
-  return texture;
-}
-
 export class ParticleSystem {
   constructor() {
     this.container = new THREE.Group();
-
-    this.dropletTexture = createDropletTexture();
 
     this.uniforms = {
       uTime: { value: 0 },
       uScrollProgress: { value: 0 },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uMode: { value: 1.0 }, // 1 = impact (cyan), 0 = crisis (amber)
-      tDroplet: { value: this.dropletTexture },
     };
 
     this.targetMode = 1.0;
@@ -52,11 +25,11 @@ export class ParticleSystem {
       depthTest: false,
     });
 
-    // Layer 1: Ambient floating moisture field (1,400 particles, sizes 6.0 to 14.0)
-    this.createLayer(1400, 6.0, 14.0, 95, 95, 45, -8.0);
+    // Layer 1: Ambient floating moisture field (1,500 particles, sizes 6.0 to 14.0)
+    this.createLayer(1500, 6.0, 14.0, 95, 95, 45, -8.0);
 
-    // Layer 2: Large prominent bokeh water droplets (400 droplets, sizes 22.0 to 52.0)
-    this.createLayer(400, 22.0, 52.0, 80, 80, 30, -3.0);
+    // Layer 2: Large prominent radiant water droplets (450 droplets, sizes 24.0 to 56.0)
+    this.createLayer(450, 24.0, 56.0, 80, 80, 30, -3.0);
   }
 
   createLayer(count, minSize, maxSize, spreadX, spreadY, spreadZ, offsetZ) {
