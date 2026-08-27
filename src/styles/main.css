@@ -121,13 +121,41 @@ body {
     transition: opacity 1s ease;
 }
 
+/* Scene Indicator Dots */
+.scene-indicator-dot.is-active {
+  background-color: var(--color-glacial) !important;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  transform: scale(1.4);
+}
+
 /* Modes */
 :root {
   --accent-color: var(--color-glacial);
 }
-body.mode-crisis {
+html.mode-crisis {
   --accent-color: var(--color-crisis-amber);
 }
-body.mode-impact {
+html.mode-impact {
   --accent-color: var(--color-impact-cyan);
+}
+
+/* Range slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00e5ff;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00e5ff;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
 }
