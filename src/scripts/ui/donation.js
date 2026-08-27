@@ -6,6 +6,7 @@ export class DonationEngine {
     this.litersDisplay = null;
     this.peopleDisplay = null;
     this.feedContainer = null;
+    this.tiers = [];
   }
 
   init() {
@@ -14,33 +15,50 @@ export class DonationEngine {
     this.litersDisplay = document.getElementById('donation-liters');
     this.peopleDisplay = document.getElementById('donation-people');
     this.feedContainer = document.getElementById('donor-feed');
+    this.tiers = Array.from(document.querySelectorAll('.donation-tier'));
 
     if (this.slider) {
       this.slider.addEventListener('input', (e) => {
-        this.amount = parseInt(e.target.value, 10);
+        this.amount = parseInt(e.target.value, 10) || 100;
         this.updateCalculations();
+        this._updateSelectedTier();
       });
     }
 
     // Donation tier cube clicks
-    document.querySelectorAll('.donation-tier').forEach((tier) => {
+    this.tiers.forEach((tier) => {
       tier.addEventListener('click', () => {
         const amount = parseInt(tier.dataset.amount, 10);
-        if (amount && this.slider) {
-          this.slider.value = amount;
+        if (amount) {
           this.amount = amount;
+          if (this.slider) {
+            this.slider.value = amount;
+          }
           this.updateCalculations();
+          this._updateSelectedTier();
         }
       });
     });
 
     this.updateCalculations();
+    this._updateSelectedTier();
     this.startDonorFeed();
+  }
+
+  _updateSelectedTier() {
+    this.tiers.forEach((t) => {
+      const amt = parseInt(t.dataset.amount, 10);
+      if (amt === this.amount) {
+        t.classList.add('is-selected');
+      } else {
+        t.classList.remove('is-selected');
+      }
+    });
   }
 
   updateCalculations() {
     const liters = this.amount * 60;
-    const people = Math.floor(liters / 125);
+    const people = Math.max(1, Math.floor(liters / 125));
 
     if (this.amountDisplay) {
       this.amountDisplay.textContent = '$' + this.amount.toLocaleString();
@@ -56,57 +74,57 @@ export class DonationEngine {
   startDonorFeed() {
     if (!this.feedContainer) return;
 
-    const names = [
-      'Sarah J.', 'Michael T.', 'Alex R.', 'Emma W.', 'David L.',
-      'Yuki K.', 'Priya S.', 'Omar H.', 'Sofia M.', 'Liam O.',
-      'Aisha B.', 'Carlos F.', 'Nina P.', 'Kai W.', 'Grace N.',
+    const initialDonors = [
+      { name: 'Sarah J.', loc: 'Toronto, CA', amt: 150 },
+      { name: 'Marcus K.', loc: 'Berlin, DE', amt: 25 },
+      { name: 'Carlos F.', loc: 'Stockholm, SE', amt: 60 },
     ];
-    const locations = [
-      'New York, USA', 'London, UK', 'Sydney, AU', 'Toronto, CA', 'Berlin, DE',
-      'Tokyo, JP', 'Mumbai, IN', 'Dubai, AE', 'São Paulo, BR', 'Stockholm, SE',
-    ];
-    const amounts = [25, 50, 60, 100, 150, 250, 500, 1000, 1500];
 
-    // Initial delay before first entry
-    setTimeout(() => {
-      this._addDonorEntry(names, locations, amounts);
-    }, 3000);
-
-    setInterval(() => {
-      this._addDonorEntry(names, locations, amounts);
-    }, 5000);
-  }
-
-  _addDonorEntry(names, locations, amounts) {
-    if (!this.feedContainer) return;
-
-    const name = names[Math.floor(Math.random() * names.length)];
-    const location = locations[Math.floor(Math.random() * locations.length)];
-    const amount = amounts[Math.floor(Math.random() * amounts.length)];
-
-    const entry = document.createElement('div');
-    entry.className = 'flex items-center justify-between px-4 py-2 rounded-lg glass text-xs';
-    entry.innerHTML = `
-      <span class="text-white/40">${name} <span class="text-white/20">· ${location}</span></span>
-      <span class="text-glacial font-display font-semibold">$${amount.toLocaleString()}</span>
-    `;
-
-    entry.style.opacity = '0';
-    entry.style.transform = 'translateY(-10px)';
-    entry.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-
-    this.feedContainer.prepend(entry);
-
-    requestAnimationFrame(() => {
-      entry.style.opacity = '1';
-      entry.style.transform = 'translateY(0)';
+    this.feedContainer.innerHTML = '';
+    initialDonors.forEach((d) => {
+      const entry = this._createDonorElement(d.name, d.loc, d.amt);
+      this.feedContainer.appendChild(entry);
     });
 
-    // Keep only the last 4 entries
-    while (this.feedContainer.children.length > 4) {
-      const last = this.feedContainer.lastElementChild;
-      last.style.opacity = '0';
-      setTimeout(() => last.remove(), 300);
-    }
+    const pool = [
+      { name: 'Alex R.', loc: 'London, UK', amt: 250 },
+      { name: 'Emma W.', loc: 'Sydney, AU', amt: 100 },
+      { name: 'David L.', loc: 'New York, USA', amt: 50 },
+      { name: 'Yuki K.', loc: 'Tokyo, JP', amt: 500 },
+      { name: 'Priya S.', loc: 'Mumbai, IN', amt: 25 },
+      { name: 'Omar H.', loc: 'Dubai, AE', amt: 1500 },
+      { name: 'Sofia M.', loc: 'São Paulo, BR', amt: 60 },
+    ];
+
+    setInterval(() => {
+      const randomDonor = pool[Math.floor(Math.random() * pool.length)];
+      const entry = this._createDonorElement(randomDonor.name, randomDonor.loc, randomDonor.amt);
+      entry.style.opacity = '0';
+      entry.style.transform = 'translateY(-6px)';
+      entry.style.transition = 'all 0.4s ease';
+
+      this.feedContainer.prepend(entry);
+
+      requestAnimationFrame(() => {
+        entry.style.opacity = '1';
+        entry.style.transform = 'translateY(0)';
+      });
+
+      // Keep fixed 3 entries max to prevent vertical layout shifts
+      if (this.feedContainer.children.length > 3) {
+        const last = this.feedContainer.lastElementChild;
+        if (last) last.remove();
+      }
+    }, 4500);
+  }
+
+  _createDonorElement(name, location, amount) {
+    const entry = document.createElement('div');
+    entry.className = 'flex items-center justify-between px-4 py-2.5 rounded-lg glass text-xs w-full';
+    entry.innerHTML = `
+      <span class="text-white/60 font-body">${name} <span class="text-white/30 font-mono text-[10px]">· ${location}</span></span>
+      <span class="text-glacial font-mono font-semibold">$${amount.toLocaleString()}</span>
+    `;
+    return entry;
   }
 }

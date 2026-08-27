@@ -25,64 +25,65 @@
   <!-- LOADING SCREEN                                             -->
   <!-- ═══════════════════════════════════════════════════════════ -->
   <section id="loading-screen" class="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-obsidian">
-    <div class="loading-logo mb-12">
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" class="animate-pulse">
+    <div class="loading-logo mb-8">
+      <svg width="64" height="64" viewBox="0 0 60 60" fill="none" class="animate-pulse">
         <circle cx="30" cy="30" r="28" stroke="#00e5ff" stroke-width="1" opacity="0.3" />
         <circle cx="30" cy="30" r="18" stroke="#00e5ff" stroke-width="1" opacity="0.5" />
-        <circle cx="30" cy="30" r="8" fill="#00e5ff" opacity="0.8" />
+        <circle cx="30" cy="30" r="8" fill="#00e5ff" opacity="0.85" />
       </svg>
     </div>
-    <p class="t-label text-glacial tracking-[0.3em] mb-8">AQUASOURCE // INITIALIZING</p>
-    <div class="w-48 h-px bg-white/10 relative overflow-hidden rounded-full">
+    <p class="t-label text-glacial tracking-[0.35em] mb-6 text-xs">AQUASOURCE // INITIALIZING</p>
+    <div class="w-48 h-1 bg-white/10 relative overflow-hidden rounded-full">
       <div class="loading-progress-fill absolute inset-y-0 left-0 w-full bg-glacial origin-left scale-x-0"></div>
     </div>
-    <p class="loading-counter t-mono text-white/40 mt-4 text-sm">0</p>
+    <p class="loading-counter font-mono text-white/40 mt-3 text-xs">0%</p>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- WEBGL CANVAS (Fixed Background)                            -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <div id="webgl" class="fixed inset-0 w-full h-screen z-0 pointer-events-none"></div>
+  <div id="webgl" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></div>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- HEADER / NAVIGATION                                        -->
   <!-- ═══════════════════════════════════════════════════════════ -->
   <header class="fixed top-0 left-0 w-full z-50 pointer-events-none">
-    <div class="flex items-center justify-between px-6 md:px-12 py-6">
+    <div class="flex items-center justify-between px-6 md:px-12 py-6 bg-gradient-to-b from-obsidian/80 to-transparent backdrop-blur-[2px]">
       <!-- Logo -->
       <a href="#hero" data-scroll-to="#hero" class="pointer-events-auto flex items-center gap-3 group">
         <div class="w-8 h-8 rounded-full border border-glacial/40 flex items-center justify-center group-hover:bg-glacial/10 transition-colors">
           <div class="w-2 h-2 rounded-full bg-glacial"></div>
         </div>
-        <span class="t-label text-white/80 tracking-[0.25em] text-xs">AQUASOURCE</span>
+        <span class="t-label text-white/90 tracking-[0.25em] text-xs font-semibold">AQUASOURCE</span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-10 pointer-events-auto">
-        <a href="#chapter-01" data-scroll-to="#chapter-01" class="t-label text-white/50 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Crisis</a>
-        <a href="#chapter-02" data-scroll-to="#chapter-02" class="t-label text-white/50 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Technology</a>
-        <a href="#chapter-03" data-scroll-to="#chapter-03" class="t-label text-white/50 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Hardware</a>
-        <a href="#dispatches" data-scroll-to="#dispatches" class="t-label text-white/50 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Dispatches</a>
-        <a href="#fund" data-scroll-to="#fund" class="t-label text-white/50 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Fund</a>
+      <nav class="hidden md:flex items-center gap-8 lg:gap-10 pointer-events-auto">
+        <a href="#chapter-01" data-scroll-to="#chapter-01" class="t-label text-white/60 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Crisis</a>
+        <a href="#chapter-02" data-scroll-to="#chapter-02" class="t-label text-white/60 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Technology</a>
+        <a href="#chapter-03" data-scroll-to="#chapter-03" class="t-label text-white/60 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Hardware</a>
+        <a href="#mode-switch" data-scroll-to="#mode-switch" class="t-label text-white/60 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Perspective</a>
+        <a href="#dispatches" data-scroll-to="#dispatches" class="t-label text-white/60 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Dispatches</a>
+        <a href="#fund" data-scroll-to="#fund" class="t-label text-white/60 hover:text-glacial transition-colors text-xs tracking-[0.15em]">Fund</a>
       </nav>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden pointer-events-auto w-10 h-10 flex flex-col items-center justify-center gap-1.5">
-        <span class="w-5 h-px bg-white/70 transition-transform"></span>
-        <span class="w-5 h-px bg-white/70 transition-transform"></span>
+      <button id="mobile-menu-btn" class="md:hidden pointer-events-auto w-10 h-10 flex flex-col items-center justify-center gap-1.5 glass rounded-lg" aria-label="Menu">
+        <span class="w-5 h-px bg-white/80"></span>
+        <span class="w-5 h-px bg-white/80"></span>
       </button>
     </div>
   </header>
 
-  <!-- Scene Indicator (Side dots) -->
-  <div class="fixed left-6 md:left-10 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3">
-    <button class="scene-indicator-dot is-active w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#hero"></button>
-    <button class="scene-indicator-dot w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#chapter-01"></button>
-    <button class="scene-indicator-dot w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#chapter-02"></button>
-    <button class="scene-indicator-dot w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#chapter-03"></button>
-    <button class="scene-indicator-dot w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#mode-switch"></button>
-    <button class="scene-indicator-dot w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#dispatches"></button>
-    <button class="scene-indicator-dot w-2 h-2 rounded-full bg-white/20 transition-all hover:bg-glacial" data-scroll-to="#fund"></button>
+  <!-- Scene Indicator (Left side dots) -->
+  <div class="fixed left-6 md:left-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3.5 pointer-events-auto">
+    <button class="scene-indicator-dot is-active" title="Hero" data-scroll-to="#hero"></button>
+    <button class="scene-indicator-dot" title="Chapter 01: Crisis" data-scroll-to="#chapter-01"></button>
+    <button class="scene-indicator-dot" title="Chapter 02: Technology" data-scroll-to="#chapter-02"></button>
+    <button class="scene-indicator-dot" title="Chapter 03: Hardware" data-scroll-to="#chapter-03"></button>
+    <button class="scene-indicator-dot" title="Chapter 04: Perspective" data-scroll-to="#mode-switch"></button>
+    <button class="scene-indicator-dot" title="Chapter 05: Dispatches" data-scroll-to="#dispatches"></button>
+    <button class="scene-indicator-dot" title="Chapter 06: Fund" data-scroll-to="#fund"></button>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
@@ -93,93 +94,93 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- HERO / KEYVISUAL                                    -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="hero" class="chapter min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
-      <div class="chapter-content">
+    <section id="hero" class="chapter min-h-screen flex flex-col items-center justify-center text-center px-6 pt-28 pb-32 relative">
+      <div class="chapter-content max-w-5xl mx-auto">
         <!-- Chapter Label -->
-        <p class="t-label text-glacial/60 tracking-[0.4em] mb-6 reveal-text">INITIATIVE // 01</p>
+        <p class="t-label text-glacial/70 tracking-[0.4em] mb-4 reveal-text text-xs">INITIATIVE // 01</p>
 
         <!-- Main Title -->
-        <h1 class="hero-title t-display text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] font-display font-bold leading-none tracking-tighter mb-6">
+        <h1 class="hero-title t-display font-bold leading-none tracking-tighter mb-6">
           <span class="block">AQUA</span>
           <span class="block text-glacial">SOURCE</span>
         </h1>
 
         <!-- Subtitle -->
-        <p class="hero-subtitle t-body text-white/50 max-w-xl mx-auto text-lg md:text-xl leading-relaxed mb-12">
+        <p class="hero-subtitle t-body text-white/60 max-w-xl mx-auto text-base md:text-lg leading-relaxed mb-10">
           Pure Water from Thin Air for Every Community.<br />
-          Atmospheric extraction technology ending water poverty.
+          Atmospheric extraction technology ending global water poverty.
         </p>
 
         <!-- Telemetry Strip -->
-        <div class="flex flex-wrap justify-center gap-8 md:gap-16 mb-14">
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 mb-12">
           <div class="hero-telemetry-item text-center">
-            <p class="stat-number t-stat-number text-3xl md:text-5xl font-display text-glacial tabular-nums" data-target="771" data-suffix="M">0</p>
-            <p class="t-label text-white/30 text-[10px] mt-1 tracking-[0.2em]">PEOPLE WITHOUT CLEAN WATER</p>
+            <p class="stat-number t-stat-number font-display text-glacial tabular-nums" data-target="771" data-suffix="M">0</p>
+            <p class="t-label text-white/40 text-[10px] mt-1 tracking-[0.2em]">PEOPLE WITHOUT CLEAN WATER</p>
           </div>
           <div class="hero-telemetry-item text-center">
-            <p class="stat-number t-stat-number text-3xl md:text-5xl font-display text-glacial tabular-nums" data-target="2400" data-suffix="">0</p>
-            <p class="t-label text-white/30 text-[10px] mt-1 tracking-[0.2em]">DAILY LITERS EXTRACTED</p>
+            <p class="stat-number t-stat-number font-display text-glacial tabular-nums" data-target="2400" data-suffix="">0</p>
+            <p class="t-label text-white/40 text-[10px] mt-1 tracking-[0.2em]">DAILY LITERS EXTRACTED</p>
           </div>
           <div class="hero-telemetry-item text-center">
-            <p class="stat-number t-stat-number text-3xl md:text-5xl font-display text-glacial tabular-nums" data-target="34">0</p>
-            <p class="t-label text-white/30 text-[10px] mt-1 tracking-[0.2em]">ACTIVE FIELD STATIONS</p>
+            <p class="stat-number t-stat-number font-display text-glacial tabular-nums" data-target="34" data-suffix="">0</p>
+            <p class="t-label text-white/40 text-[10px] mt-1 tracking-[0.2em]">ACTIVE FIELD STATIONS</p>
           </div>
         </div>
 
-        <!-- CTA Cube -->
-        <div class="hero-cta">
-          <div class="cube-container cube--md mx-auto" style="width:220px;height:56px;">
+        <!-- CTA Cube Button -->
+        <div class="hero-cta mb-8">
+          <div class="cube-container cube--md mx-auto" style="width: 220px; height: 52px;">
             <div class="cube-wrapper">
-              <a href="#fund" data-scroll-to="#fund" class="cube-face cube-face--front bg-glacial/10 border border-glacial/30 flex items-center justify-center gap-3 hover:bg-glacial/20 transition-colors">
+              <a href="#fund" data-scroll-to="#fund" class="cube-face cube-face--front bg-glacial/10 border border-glacial/40 rounded-xl flex items-center justify-center gap-2.5 hover:bg-glacial/20 transition-all cursor-pointer">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-glacial"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="t-label text-glacial text-xs tracking-[0.2em]">FUND CLEAN WATER</span>
+                <span class="t-label text-glacial text-xs tracking-[0.2em] font-semibold">FUND CLEAN WATER</span>
               </a>
-              <div class="cube-face cube-face--back bg-glacial flex items-center justify-center">
-                <span class="t-label text-obsidian text-xs tracking-[0.2em]">EVERY DROP COUNTS</span>
+              <div class="cube-face cube-face--back bg-glacial rounded-xl flex items-center justify-center">
+                <span class="t-label text-obsidian text-xs tracking-[0.2em] font-bold">EVERY DROP COUNTS</span>
               </div>
-              <div class="cube-face cube-face--top bg-glacial/20"></div>
-              <div class="cube-face cube-face--bottom bg-obsidian"></div>
-              <div class="cube-face cube-face--left bg-glacial/10"></div>
-              <div class="cube-face cube-face--right bg-glacial/10"></div>
+              <div class="cube-face cube-face--top bg-glacial/20 rounded-xl"></div>
+              <div class="cube-face cube-face--bottom bg-obsidian rounded-xl"></div>
+              <div class="cube-face cube-face--left bg-glacial/10 rounded-xl"></div>
+              <div class="cube-face cube-face--right bg-glacial/10 rounded-xl"></div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Scroll indicator -->
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <span class="t-label text-white/20 text-[9px] tracking-[0.3em]">SCROLL</span>
-        <div class="w-px h-8 bg-gradient-to-b from-glacial/40 to-transparent"></div>
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce pointer-events-none opacity-60">
+        <span class="t-label text-white/40 text-[9px] tracking-[0.3em]">SCROLL</span>
+        <div class="w-px h-6 bg-gradient-to-b from-glacial/60 to-transparent"></div>
       </div>
     </section>
 
     <!-- ─────────────────────────────────────────────────── -->
     <!-- CHAPTER 01: THE GLOBAL CRISIS                       -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="chapter-01" class="chapter min-h-screen flex items-center py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
-      <span class="chapter-number absolute top-20 left-6 md:left-12 t-display text-[8rem] md:text-[14rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">01</span>
+    <section id="chapter-01" class="chapter min-h-screen py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
+      <span class="chapter-number absolute top-16 left-6 md:left-12 t-display text-[7rem] md:text-[12rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">01</span>
       <div class="chapter-content max-w-5xl mx-auto">
-        <p class="t-label text-crisis-amber/70 tracking-[0.3em] mb-4 stagger-item">CHAPTER 01 — THE CRISIS</p>
+        <p class="t-label text-crisis-amber/80 tracking-[0.3em] mb-4 stagger-item">CHAPTER 01 — THE CRISIS</p>
         <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-8">
           771 Million People<br />
           <span class="text-crisis-amber">Live Without Clean Water.</span>
         </h2>
 
-        <div class="grid md:grid-cols-3 gap-6 md:gap-10 mt-12">
-          <div class="stagger-item glass rounded-2xl p-8 border border-white/5">
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+          <div class="stagger-item glass rounded-2xl p-8 border border-white/10 hover:border-crisis-amber/30 transition-all">
             <p class="stat-number text-4xl md:text-5xl font-display text-crisis-amber tabular-nums mb-2" data-target="200" data-suffix="M">0</p>
-            <p class="t-label text-white/30 text-[10px] tracking-[0.15em] mb-3">HOURS PER DAY</p>
-            <p class="text-white/50 text-sm leading-relaxed">Women and children spend 200 million hours daily walking to collect water from distant, often contaminated sources.</p>
+            <p class="t-label text-white/40 text-[10px] tracking-[0.15em] mb-3">HOURS PER DAY</p>
+            <p class="text-white/60 text-sm leading-relaxed">Women and children spend 200 million hours daily walking to collect water from distant, contaminated sources.</p>
           </div>
-          <div class="stagger-item glass rounded-2xl p-8 border border-white/5">
+          <div class="stagger-item glass rounded-2xl p-8 border border-white/10 hover:border-crisis-amber/30 transition-all">
             <p class="stat-number text-4xl md:text-5xl font-display text-crisis-amber tabular-nums mb-2" data-target="1000" data-suffix="">0</p>
-            <p class="t-label text-white/30 text-[10px] tracking-[0.15em] mb-3">CHILDREN DIE DAILY</p>
-            <p class="text-white/50 text-sm leading-relaxed">Over 1,000 children under 5 die every day from waterborne diseases linked to unsafe drinking water and poor sanitation.</p>
+            <p class="t-label text-white/40 text-[10px] tracking-[0.15em] mb-3">CHILDREN DIE DAILY</p>
+            <p class="text-white/60 text-sm leading-relaxed">Over 1,000 children under 5 die every day from waterborne diseases linked to unsafe drinking water and poor sanitation.</p>
           </div>
-          <div class="stagger-item glass rounded-2xl p-8 border border-white/5">
+          <div class="stagger-item glass rounded-2xl p-8 border border-white/10 hover:border-crisis-amber/30 transition-all">
             <p class="stat-number text-4xl md:text-5xl font-display text-crisis-amber tabular-nums mb-2" data-target="2" data-suffix="B">0</p>
-            <p class="t-label text-white/30 text-[10px] tracking-[0.15em] mb-3">PEOPLE AFFECTED</p>
-            <p class="text-white/50 text-sm leading-relaxed">Nearly 2 billion people worldwide use contaminated water sources, exposing entire communities to cholera, typhoid, and dysentery.</p>
+            <p class="t-label text-white/40 text-[10px] tracking-[0.15em] mb-3">PEOPLE AFFECTED</p>
+            <p class="text-white/60 text-sm leading-relaxed">Nearly 2 billion people worldwide use contaminated water sources, exposing entire communities to severe health risks.</p>
           </div>
         </div>
       </div>
@@ -188,52 +189,52 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- CHAPTER 02: THE TECHNOLOGY                          -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="chapter-02" class="chapter min-h-screen flex items-center py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
-      <span class="chapter-number absolute top-20 right-6 md:right-12 t-display text-[8rem] md:text-[14rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">02</span>
+    <section id="chapter-02" class="chapter min-h-screen py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
+      <span class="chapter-number absolute top-16 right-6 md:right-12 t-display text-[7rem] md:text-[12rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">02</span>
       <div class="chapter-content max-w-5xl mx-auto">
-        <p class="t-label text-glacial/70 tracking-[0.3em] mb-4 stagger-item">CHAPTER 02 — THE TECHNOLOGY</p>
+        <p class="t-label text-glacial/80 tracking-[0.3em] mb-4 stagger-item">CHAPTER 02 — THE TECHNOLOGY</p>
         <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-8">
           Solar Atmospheric<br />
           <span class="text-glacial">Hydro-Extraction.</span>
         </h2>
 
-        <p class="stagger-item text-white/50 text-lg leading-relaxed max-w-2xl mb-16">
-          AQUASOURCE technology harvests moisture directly from atmospheric humidity—even in arid regions with as low as 15% humidity—using solar-powered condensation and graphene nano-filtration.
+        <p class="stagger-item text-white/60 text-base md:text-lg leading-relaxed max-w-2xl mb-12">
+          AQUASOURCE harvests moisture directly from atmospheric humidity—even in arid climates with as low as 15% humidity—using solar condensation and graphene nano-filtration.
         </p>
 
         <!-- Technology Steps -->
-        <div class="grid md:grid-cols-4 gap-4 md:gap-6">
-          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/10 text-center group hover:border-glacial/30 transition-colors">
-            <div class="w-16 h-16 rounded-full bg-glacial/5 border border-glacial/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-glacial/10 transition-colors">
-              <span class="text-glacial text-2xl">☀</span>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/15 text-center group hover:border-glacial/40 transition-all">
+            <div class="w-14 h-14 rounded-full bg-glacial/10 border border-glacial/25 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-glacial text-xl">☀</span>
             </div>
-            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2">STEP 01</p>
-            <p class="font-display font-semibold text-sm mb-1">Solar Capture</p>
-            <p class="text-white/40 text-xs leading-relaxed">Aerospace-grade photovoltaic envelope powers the extraction cycle autonomously.</p>
+            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STEP 01</p>
+            <p class="font-display font-semibold text-sm mb-1.5 text-white">Solar Capture</p>
+            <p class="text-white/50 text-xs leading-relaxed">Aerospace-grade photovoltaic envelope powers the extraction cycle autonomously.</p>
           </div>
-          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/10 text-center group hover:border-glacial/30 transition-colors">
-            <div class="w-16 h-16 rounded-full bg-glacial/5 border border-glacial/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-glacial/10 transition-colors">
-              <span class="text-glacial text-2xl">💧</span>
+          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/15 text-center group hover:border-glacial/40 transition-all">
+            <div class="w-14 h-14 rounded-full bg-glacial/10 border border-glacial/25 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-glacial text-xl">💧</span>
             </div>
-            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2">STEP 02</p>
-            <p class="font-display font-semibold text-sm mb-1">Dew Point Condensation</p>
-            <p class="text-white/40 text-xs leading-relaxed">Peltier thermoelectric core reaches dew point, pulling water molecules from air.</p>
+            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STEP 02</p>
+            <p class="font-display font-semibold text-sm mb-1.5 text-white">Dew Point Condensation</p>
+            <p class="text-white/50 text-xs leading-relaxed">Peltier thermoelectric core reaches dew point, pulling water molecules from air.</p>
           </div>
-          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/10 text-center group hover:border-glacial/30 transition-colors">
-            <div class="w-16 h-16 rounded-full bg-glacial/5 border border-glacial/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-glacial/10 transition-colors">
-              <span class="text-glacial text-2xl">⬡</span>
+          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/15 text-center group hover:border-glacial/40 transition-all">
+            <div class="w-14 h-14 rounded-full bg-glacial/10 border border-glacial/25 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-glacial text-xl">⬡</span>
             </div>
-            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2">STEP 03</p>
-            <p class="font-display font-semibold text-sm mb-1">Graphene Nano-Filtration</p>
-            <p class="text-white/40 text-xs leading-relaxed">Multi-stage graphene membrane removes 99.99% contaminants at molecular level.</p>
+            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STEP 03</p>
+            <p class="font-display font-semibold text-sm mb-1.5 text-white">Graphene Nano-Filtration</p>
+            <p class="text-white/50 text-xs leading-relaxed">Multi-stage graphene membrane removes 99.99% contaminants at molecular level.</p>
           </div>
-          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/10 text-center group hover:border-glacial/30 transition-colors">
-            <div class="w-16 h-16 rounded-full bg-glacial/5 border border-glacial/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-glacial/10 transition-colors">
-              <span class="text-glacial text-2xl">✦</span>
+          <div class="stagger-item glass rounded-2xl p-6 border border-glacial/15 text-center group hover:border-glacial/40 transition-all">
+            <div class="w-14 h-14 rounded-full bg-glacial/10 border border-glacial/25 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-glacial text-xl">✦</span>
             </div>
-            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2">STEP 04</p>
-            <p class="font-display font-semibold text-sm mb-1">Mineral Remineralization</p>
-            <p class="text-white/40 text-xs leading-relaxed">Essential minerals are reintroduced, producing crisp, clean, nourishing drinking water.</p>
+            <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STEP 04</p>
+            <p class="font-display font-semibold text-sm mb-1.5 text-white">Remineralization</p>
+            <p class="text-white/50 text-xs leading-relaxed">Essential minerals are reintroduced, producing crisp, pure drinking water.</p>
           </div>
         </div>
       </div>
@@ -242,69 +243,62 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- CHAPTER 03: HARDWARE ANATOMY                        -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="chapter-03" class="chapter min-h-screen flex items-center py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
-      <span class="chapter-number absolute top-20 left-6 md:left-12 t-display text-[8rem] md:text-[14rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">03</span>
+    <section id="chapter-03" class="chapter min-h-screen py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
+      <span class="chapter-number absolute top-16 left-6 md:left-12 t-display text-[7rem] md:text-[12rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">03</span>
       <div class="chapter-content max-w-5xl mx-auto">
-        <p class="t-label text-glacial/70 tracking-[0.3em] mb-4 stagger-item">CHAPTER 03 — HARDWARE</p>
+        <p class="t-label text-glacial/80 tracking-[0.3em] mb-4 stagger-item">CHAPTER 03 — HARDWARE</p>
         <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-8">
           AQUASOURCE<br />
           <span class="text-glacial">Model-X Unit.</span>
         </h2>
 
-        <div class="grid md:grid-cols-2 gap-10 mt-12">
+        <div class="grid md:grid-cols-2 gap-10 mt-8 items-center">
           <!-- Specs List -->
-          <div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">Solar Envelope</span>
-              <span class="t-label text-glacial text-[10px]">380W PEROVSKITE</span>
+          <div class="glass rounded-2xl p-6 md:p-8 border border-white/10">
+            <div class="stagger-item border-b border-white/10 py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">Solar Envelope</span>
+              <span class="t-label text-glacial text-xs font-mono">380W PEROVSKITE</span>
             </div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">Condensation Core</span>
-              <span class="t-label text-glacial text-[10px]">PELTIER TEC-127</span>
+            <div class="stagger-item border-b border-white/10 py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">Condensation Core</span>
+              <span class="t-label text-glacial text-xs font-mono">PELTIER TEC-127</span>
             </div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">Filtration Stage</span>
-              <span class="t-label text-glacial text-[10px]">GRAPHENE 0.1nm</span>
+            <div class="stagger-item border-b border-white/10 py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">Filtration Stage</span>
+              <span class="t-label text-glacial text-xs font-mono">GRAPHENE 0.1nm</span>
             </div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">Daily Output</span>
-              <span class="t-label text-glacial text-[10px]">80-120L / DAY</span>
+            <div class="stagger-item border-b border-white/10 py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">Daily Output</span>
+              <span class="t-label text-glacial text-xs font-mono">80-120L / DAY</span>
             </div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">Humidity Range</span>
-              <span class="t-label text-glacial text-[10px]">15-100% RH</span>
+            <div class="stagger-item border-b border-white/10 py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">Humidity Range</span>
+              <span class="t-label text-glacial text-xs font-mono">15-100% RH</span>
             </div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">IoT Telemetry</span>
-              <span class="t-label text-glacial text-[10px]">SATELLITE MESH</span>
+            <div class="stagger-item border-b border-white/10 py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">IoT Telemetry</span>
+              <span class="t-label text-glacial text-xs font-mono">SATELLITE MESH</span>
             </div>
-            <div class="stagger-item border-b border-white/5 py-5 flex justify-between items-center">
-              <span class="text-white/40 text-sm">Lifespan</span>
-              <span class="t-label text-glacial text-[10px]">15+ YEARS</span>
+            <div class="stagger-item py-3.5 flex justify-between items-center">
+              <span class="text-white/60 text-sm">Lifespan</span>
+              <span class="t-label text-glacial text-xs font-mono">15+ YEARS</span>
             </div>
           </div>
 
-          <!-- Hardware Visual Placeholder -->
+          <!-- Hardware Visual Core -->
           <div class="stagger-item flex items-center justify-center">
-            <div class="relative w-full aspect-square max-w-md">
-              <div class="absolute inset-0 rounded-3xl border border-glacial/10 bg-glacial/[0.02]"></div>
-              <div class="absolute inset-8 rounded-2xl border border-glacial/20 bg-glacial/[0.03] flex items-center justify-center">
-                <div class="text-center">
-                  <div class="w-24 h-24 rounded-full border-2 border-glacial/30 mx-auto mb-4 flex items-center justify-center">
-                    <div class="w-12 h-12 rounded-full border border-glacial/50 flex items-center justify-center">
-                      <div class="w-4 h-4 rounded-full bg-glacial/60"></div>
-                    </div>
-                  </div>
-                  <p class="t-label text-glacial/40 text-[9px] tracking-[0.3em]">MODEL-X // CORE</p>
-                  <p class="t-label text-white/20 text-[8px] tracking-[0.2em] mt-1">ATMOSPHERIC WATER GENERATOR</p>
+            <div class="relative w-full aspect-square max-w-sm rounded-3xl glass border border-glacial/20 p-8 flex flex-col items-center justify-center text-center">
+              <div class="w-28 h-28 rounded-full border-2 border-glacial/40 flex items-center justify-center mb-6 relative">
+                <div class="w-16 h-16 rounded-full border border-glacial/60 flex items-center justify-center">
+                  <div class="w-6 h-6 rounded-full bg-glacial shadow-[0_0_20px_#00e5ff]"></div>
                 </div>
+                <div class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-glacial animate-ping"></div>
               </div>
-              <!-- Orbiting specs -->
-              <div class="absolute top-4 right-4 glass rounded-lg px-3 py-1.5">
-                <p class="t-label text-glacial text-[8px]">380W</p>
-              </div>
-              <div class="absolute bottom-4 left-4 glass rounded-lg px-3 py-1.5">
-                <p class="t-label text-glacial text-[8px]">0.1nm FILTER</p>
+              <p class="t-label text-glacial text-xs tracking-[0.3em] font-semibold mb-1">MODEL-X // CORE</p>
+              <p class="text-white/40 text-xs tracking-wider">ATMOSPHERIC WATER GENERATOR</p>
+              <div class="mt-6 flex gap-3">
+                <span class="px-3 py-1 rounded-full bg-glacial/10 border border-glacial/30 text-glacial text-[10px] font-mono">380W</span>
+                <span class="px-3 py-1 rounded-full bg-glacial/10 border border-glacial/30 text-glacial text-[10px] font-mono">0.1nm FILTER</span>
               </div>
             </div>
           </div>
@@ -315,62 +309,62 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- CHAPTER 04: MODE SWITCHER [CRISIS ⇄ IMPACT]        -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="mode-switch" class="chapter min-h-screen flex items-center justify-center py-24 md:py-32 px-6 relative">
-      <div class="chapter-content text-center max-w-4xl mx-auto">
-        <p class="t-label text-white/40 tracking-[0.3em] mb-6 stagger-item">CHAPTER 04 — PERSPECTIVE</p>
-        <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
+    <section id="mode-switch" class="chapter min-h-screen py-24 md:py-32 px-6 relative">
+      <div class="chapter-content text-center max-w-5xl mx-auto">
+        <p class="t-label text-white/50 tracking-[0.3em] mb-4 stagger-item">CHAPTER 04 — PERSPECTIVE</p>
+        <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-4">
           See the World<br />
           <span class="text-glacial">Through Both Lenses.</span>
         </h2>
-        <p class="stagger-item text-white/40 text-lg max-w-xl mx-auto mb-16">
-          Toggle between crisis and impact to understand the transformation AQUASOURCE technology delivers.
+        <p class="stagger-item text-white/50 text-base md:text-lg max-w-xl mx-auto mb-10">
+          Toggle between crisis and impact to experience how clean water transforms communities.
         </p>
 
-        <!-- Mode Switcher Toggle -->
-        <div id="mode-switcher" class="stagger-item inline-flex items-center gap-6 glass rounded-full px-3 py-3 border border-white/10">
-          <span class="mode-label mode-label--crisis t-label text-xs tracking-[0.2em] px-4 text-crisis-amber">CRISIS</span>
-          <button id="mode-toggle" class="relative w-20 h-10 rounded-full bg-white/5 border border-white/10 transition-colors group" aria-label="Toggle mode">
-            <div class="mode-toggle-handle absolute top-1 left-1 w-8 h-8 rounded-full bg-glacial transition-transform shadow-lg shadow-glacial/20"></div>
+        <!-- Mode Switcher Toggle Widget -->
+        <div class="stagger-item inline-flex items-center gap-4 glass rounded-full px-5 py-3 border border-white/20 mb-12 cursor-pointer shadow-lg shadow-black/40">
+          <button type="button" class="mode-label mode-label--crisis t-label text-xs tracking-[0.2em] font-mono transition-all text-crisis-amber cursor-pointer">CRISIS</button>
+          <button id="mode-toggle" type="button" class="relative w-20 h-10 rounded-full bg-white/10 border border-white/20 transition-all cursor-pointer" aria-label="Toggle crisis or impact mode">
+            <div class="mode-toggle-handle absolute top-1 left-1 w-8 h-8 rounded-full bg-glacial transition-transform shadow-[0_0_15px_#00e5ff]"></div>
           </button>
-          <span class="mode-label mode-label--impact t-label text-xs tracking-[0.2em] px-4 text-glacial">IMPACT</span>
+          <button type="button" class="mode-label mode-label--impact t-label text-xs tracking-[0.2em] font-mono transition-all text-glacial cursor-pointer">IMPACT</button>
         </div>
 
-        <!-- Crisis / Impact Content Panels -->
-        <div class="mt-16 grid md:grid-cols-4 gap-4">
+        <!-- Crisis / Impact Content Cards -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
           <!-- Crisis Items (shown in crisis mode) -->
-          <div class="mode-content mode-content--crisis stagger-item glass rounded-2xl p-6 border border-crisis-amber/10">
-            <p class="font-display font-semibold text-lg mb-1 text-crisis-amber">Drought Zones</p>
-            <p class="text-white/40 text-sm">3.6B people face water scarcity at least one month per year.</p>
+          <div class="mode-content mode-content--crisis glass rounded-2xl p-6 border border-crisis-amber/25 bg-crisis-amber/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-crisis-amber">Drought Zones</p>
+            <p class="text-white/60 text-xs leading-relaxed">3.6B people face severe water scarcity at least one month every year.</p>
           </div>
-          <div class="mode-content mode-content--crisis stagger-item glass rounded-2xl p-6 border border-crisis-amber/10">
-            <p class="font-display font-semibold text-lg mb-1 text-crisis-amber">Disease Spread</p>
-            <p class="text-white/40 text-sm">Contaminated water transmits diseases like cholera, dysentery, typhoid.</p>
+          <div class="mode-content mode-content--crisis glass rounded-2xl p-6 border border-crisis-amber/25 bg-crisis-amber/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-crisis-amber">Disease Spread</p>
+            <p class="text-white/60 text-xs leading-relaxed">Unsafe water transmits fatal illnesses like cholera, dysentery, and typhoid.</p>
           </div>
-          <div class="mode-content mode-content--crisis stagger-item glass rounded-2xl p-6 border border-crisis-amber/10">
-            <p class="font-display font-semibold text-lg mb-1 text-crisis-amber">Lost Education</p>
-            <p class="text-white/40 text-sm">443M school days are lost each year due to water-related illness.</p>
+          <div class="mode-content mode-content--crisis glass rounded-2xl p-6 border border-crisis-amber/25 bg-crisis-amber/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-crisis-amber">Lost Education</p>
+            <p class="text-white/60 text-xs leading-relaxed">443M school days are lost each year due to water-related illnesses.</p>
           </div>
-          <div class="mode-content mode-content--crisis stagger-item glass rounded-2xl p-6 border border-crisis-amber/10">
-            <p class="font-display font-semibold text-lg mb-1 text-crisis-amber">Economic Drain</p>
-            <p class="text-white/40 text-sm">$260B lost annually in developing nations from inadequate water supply.</p>
+          <div class="mode-content mode-content--crisis glass rounded-2xl p-6 border border-crisis-amber/25 bg-crisis-amber/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-crisis-amber">Economic Drain</p>
+            <p class="text-white/60 text-xs leading-relaxed">$260B lost annually across developing nations from lack of clean water.</p>
           </div>
 
           <!-- Impact Items (shown in impact mode) -->
-          <div class="mode-content mode-content--impact stagger-item glass rounded-2xl p-6 border border-glacial/10">
-            <p class="font-display font-semibold text-lg mb-1 text-glacial">Clean Water Flow</p>
-            <p class="text-white/40 text-sm">Each unit generates 80-120L of pure water daily, autonomously.</p>
+          <div class="mode-content mode-content--impact glass rounded-2xl p-6 border border-glacial/25 bg-glacial/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-glacial">Clean Water Flow</p>
+            <p class="text-white/60 text-xs leading-relaxed">Each unit extracts 80-120L of pure drinking water daily, 100% off-grid.</p>
           </div>
-          <div class="mode-content mode-content--impact stagger-item glass rounded-2xl p-6 border border-glacial/10">
-            <p class="font-display font-semibold text-lg mb-1 text-glacial">Health Revival</p>
-            <p class="text-white/40 text-sm">Waterborne diseases drop 88% within the first year of deployment.</p>
+          <div class="mode-content mode-content--impact glass rounded-2xl p-6 border border-glacial/25 bg-glacial/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-glacial">Health Revival</p>
+            <p class="text-white/60 text-xs leading-relaxed">Waterborne diseases plummet by 88% within the first year of installation.</p>
           </div>
-          <div class="mode-content mode-content--impact stagger-item glass rounded-2xl p-6 border border-glacial/10">
-            <p class="font-display font-semibold text-lg mb-1 text-glacial">School Return</p>
-            <p class="text-white/40 text-sm">Attendance rates increase 74% when clean water reaches communities.</p>
+          <div class="mode-content mode-content--impact glass rounded-2xl p-6 border border-glacial/25 bg-glacial/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-glacial">School Return</p>
+            <p class="text-white/60 text-xs leading-relaxed">Classroom attendance surges 74% once clean water is readily available.</p>
           </div>
-          <div class="mode-content mode-content--impact stagger-item glass rounded-2xl p-6 border border-glacial/10">
-            <p class="font-display font-semibold text-lg mb-1 text-glacial">Economic Growth</p>
-            <p class="text-white/40 text-sm">Every $1 invested in water returns $4-12 in economic productivity.</p>
+          <div class="mode-content mode-content--impact glass rounded-2xl p-6 border border-glacial/25 bg-glacial/[0.03]">
+            <p class="font-display font-bold text-lg mb-1.5 text-glacial">Economic Growth</p>
+            <p class="text-white/60 text-xs leading-relaxed">Every $1 invested in clean water yields $4–12 in local economic productivity.</p>
           </div>
         </div>
       </div>
@@ -379,43 +373,49 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- CHAPTER 05: FIELD DISPATCHES                        -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="dispatches" class="chapter min-h-screen flex items-center py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
-      <span class="chapter-number absolute top-20 right-6 md:right-12 t-display text-[8rem] md:text-[14rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">05</span>
+    <section id="dispatches" class="chapter min-h-screen py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
+      <span class="chapter-number absolute top-16 right-6 md:right-12 t-display text-[7rem] md:text-[12rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">05</span>
       <div class="chapter-content max-w-6xl mx-auto w-full">
-        <p class="t-label text-glacial/70 tracking-[0.3em] mb-4 stagger-item">CHAPTER 05 — FIELD DISPATCHES</p>
-        <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-16">
+        <p class="t-label text-glacial/80 tracking-[0.3em] mb-4 stagger-item">CHAPTER 05 — FIELD DISPATCHES</p>
+        <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-12">
           Active Deployments<br />
           <span class="text-glacial">Around the Globe.</span>
         </h2>
 
         <div class="grid md:grid-cols-3 gap-6">
           <!-- Dispatch 1: Kenya -->
-          <div class="cube-container cube--lg" style="height: 360px;">
+          <div class="cube-container cube--lg" style="height: 320px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-8 border border-glacial/10 flex flex-col justify-between h-full">
+              <div class="cube-face cube-face--front glass rounded-2xl p-7 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/40 transition-colors cursor-pointer">
                 <div>
-                  <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-3">STATION KE-001</p>
-                  <h3 class="font-display font-bold text-xl mb-2">Turkana Basin</h3>
-                  <p class="text-white/30 text-sm mb-1">Kenya, East Africa</p>
+                  <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STATION KE-001</p>
+                  <h3 class="font-display font-bold text-xl mb-1 text-white">Turkana Basin</h3>
+                  <p class="text-white/40 text-xs">Kenya, East Africa</p>
                 </div>
                 <div>
-                  <div class="flex justify-between border-t border-white/5 pt-4 mt-4">
+                  <div class="flex justify-between border-t border-white/10 pt-4">
                     <div>
                       <p class="stat-number text-2xl font-display text-glacial tabular-nums" data-target="50000" data-suffix="L">0</p>
-                      <p class="t-label text-white/20 text-[8px]">LITERS / MONTH</p>
+                      <p class="t-label text-white/30 text-[8px] font-mono">LITERS / MONTH</p>
                     </div>
-                    <div>
+                    <div class="text-right">
                       <p class="stat-number text-2xl font-display text-glacial tabular-nums" data-target="1200">0</p>
-                      <p class="t-label text-white/20 text-[8px]">CHILDREN SERVED</p>
+                      <p class="t-label text-white/30 text-[8px] font-mono">CHILDREN SERVED</p>
                     </div>
                   </div>
+                  <p class="t-label text-glacial/60 text-[9px] mt-3 text-center">CLICK TO FLIP ↻</p>
                 </div>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-8 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-4">VERIFIED TELEMETRY</p>
-                <p class="text-white/50 text-sm leading-relaxed">Solar uptime: 94.2%<br/>Water quality: 99.97% pure<br/>Active since: March 2024<br/>Community: 3,400 residents</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-7 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-3 font-mono">VERIFIED TELEMETRY</p>
+                <p class="text-white/70 text-xs leading-relaxed">
+                  Solar uptime: <span class="text-glacial">94.2%</span><br/>
+                  Water purity: <span class="text-glacial">99.97%</span><br/>
+                  Deployment: <span class="text-white">March 2024</span><br/>
+                  Population: <span class="text-white">3,400 residents</span>
+                </p>
               </div>
-              <div class="cube-face cube-face--top bg-glacial/5 rounded-2xl"></div>
+              <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
               <div class="cube-face cube-face--left bg-glacial/5 rounded-2xl"></div>
               <div class="cube-face cube-face--right bg-glacial/5 rounded-2xl"></div>
@@ -423,32 +423,38 @@
           </div>
 
           <!-- Dispatch 2: Pakistan -->
-          <div class="cube-container cube--lg" style="height: 360px;">
+          <div class="cube-container cube--lg" style="height: 320px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-8 border border-glacial/10 flex flex-col justify-between h-full">
+              <div class="cube-face cube-face--front glass rounded-2xl p-7 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/40 transition-colors cursor-pointer">
                 <div>
-                  <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-3">STATION PK-003</p>
-                  <h3 class="font-display font-bold text-xl mb-2">Thar Desert</h3>
-                  <p class="text-white/30 text-sm mb-1">Sindh, Pakistan</p>
+                  <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STATION PK-003</p>
+                  <h3 class="font-display font-bold text-xl mb-1 text-white">Thar Desert</h3>
+                  <p class="text-white/40 text-xs">Sindh, Pakistan</p>
                 </div>
                 <div>
-                  <div class="flex justify-between border-t border-white/5 pt-4 mt-4">
+                  <div class="flex justify-between border-t border-white/10 pt-4">
                     <div>
                       <p class="stat-number text-2xl font-display text-glacial tabular-nums" data-target="32000" data-suffix="L">0</p>
-                      <p class="t-label text-white/20 text-[8px]">LITERS / MONTH</p>
+                      <p class="t-label text-white/30 text-[8px] font-mono">LITERS / MONTH</p>
                     </div>
-                    <div>
+                    <div class="text-right">
                       <p class="stat-number text-2xl font-display text-glacial tabular-nums" data-target="850">0</p>
-                      <p class="t-label text-white/20 text-[8px]">FAMILIES SERVED</p>
+                      <p class="t-label text-white/30 text-[8px] font-mono">FAMILIES SERVED</p>
                     </div>
                   </div>
+                  <p class="t-label text-glacial/60 text-[9px] mt-3 text-center">CLICK TO FLIP ↻</p>
                 </div>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-8 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-4">VERIFIED TELEMETRY</p>
-                <p class="text-white/50 text-sm leading-relaxed">Solar uptime: 97.1%<br/>Water quality: 99.99% pure<br/>Active since: January 2024<br/>Community: 2,800 residents</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-7 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-3 font-mono">VERIFIED TELEMETRY</p>
+                <p class="text-white/70 text-xs leading-relaxed">
+                  Solar uptime: <span class="text-glacial">97.1%</span><br/>
+                  Water purity: <span class="text-glacial">99.99%</span><br/>
+                  Deployment: <span class="text-white">January 2024</span><br/>
+                  Population: <span class="text-white">2,800 residents</span>
+                </p>
               </div>
-              <div class="cube-face cube-face--top bg-glacial/5 rounded-2xl"></div>
+              <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
               <div class="cube-face cube-face--left bg-glacial/5 rounded-2xl"></div>
               <div class="cube-face cube-face--right bg-glacial/5 rounded-2xl"></div>
@@ -456,32 +462,38 @@
           </div>
 
           <!-- Dispatch 3: Colombia -->
-          <div class="cube-container cube--lg" style="height: 360px;">
+          <div class="cube-container cube--lg" style="height: 320px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-8 border border-glacial/10 flex flex-col justify-between h-full">
+              <div class="cube-face cube-face--front glass rounded-2xl p-7 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/40 transition-colors cursor-pointer">
                 <div>
-                  <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-3">STATION CO-007</p>
-                  <h3 class="font-display font-bold text-xl mb-2">La Guajira</h3>
-                  <p class="text-white/30 text-sm mb-1">Wayuu Territory, Colombia</p>
+                  <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-2 font-mono">STATION CO-007</p>
+                  <h3 class="font-display font-bold text-xl mb-1 text-white">La Guajira</h3>
+                  <p class="text-white/40 text-xs">Wayuu Territory, Colombia</p>
                 </div>
                 <div>
-                  <div class="flex justify-between border-t border-white/5 pt-4 mt-4">
+                  <div class="flex justify-between border-t border-white/10 pt-4">
                     <div>
                       <p class="stat-number text-2xl font-display text-glacial tabular-nums" data-target="45000" data-suffix="L">0</p>
-                      <p class="t-label text-white/20 text-[8px]">LITERS / MONTH</p>
+                      <p class="t-label text-white/30 text-[8px] font-mono">LITERS / MONTH</p>
                     </div>
-                    <div>
+                    <div class="text-right">
                       <p class="stat-number text-2xl font-display text-glacial tabular-nums" data-target="960">0</p>
-                      <p class="t-label text-white/20 text-[8px]">PEOPLE SERVED</p>
+                      <p class="t-label text-white/30 text-[8px] font-mono">PEOPLE SERVED</p>
                     </div>
                   </div>
+                  <p class="t-label text-glacial/60 text-[9px] mt-3 text-center">CLICK TO FLIP ↻</p>
                 </div>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-8 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-4">VERIFIED TELEMETRY</p>
-                <p class="text-white/50 text-sm leading-relaxed">Solar uptime: 91.8%<br/>Water quality: 99.98% pure<br/>Active since: June 2024<br/>Community: Wayuu Indigenous</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-7 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-3 font-mono">VERIFIED TELEMETRY</p>
+                <p class="text-white/70 text-xs leading-relaxed">
+                  Solar uptime: <span class="text-glacial">91.8%</span><br/>
+                  Water purity: <span class="text-glacial">99.98%</span><br/>
+                  Deployment: <span class="text-white">June 2024</span><br/>
+                  Population: <span class="text-white">Wayuu Indigenous</span>
+                </p>
               </div>
-              <div class="cube-face cube-face--top bg-glacial/5 rounded-2xl"></div>
+              <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
               <div class="cube-face cube-face--left bg-glacial/5 rounded-2xl"></div>
               <div class="cube-face cube-face--right bg-glacial/5 rounded-2xl"></div>
@@ -494,32 +506,34 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- CHAPTER 06: CLEAN WATER FUND                        -->
     <!-- ─────────────────────────────────────────────────── -->
-    <section id="fund" class="chapter min-h-screen flex items-center py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
-      <span class="chapter-number absolute top-20 left-6 md:left-12 t-display text-[8rem] md:text-[14rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">06</span>
+    <section id="fund" class="chapter min-h-screen py-24 md:py-32 px-6 md:px-12 lg:px-24 relative">
+      <span class="chapter-number absolute top-16 left-6 md:left-12 t-display text-[7rem] md:text-[12rem] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none">06</span>
       <div class="chapter-content max-w-5xl mx-auto w-full">
-        <p class="t-label text-glacial/70 tracking-[0.3em] mb-4 stagger-item">CHAPTER 06 — THE FUND</p>
-        <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
+        <p class="t-label text-glacial/80 tracking-[0.3em] mb-4 stagger-item">CHAPTER 06 — THE FUND</p>
+        <h2 class="chapter-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-4">
           Every Drop<br />
           <span class="text-glacial">Counts.</span>
         </h2>
-        <p class="stagger-item text-white/40 text-lg max-w-xl mb-16">
-          Choose your impact tier. Every contribution is transparently tracked and directly funds hardware deployment.
+        <p class="stagger-item text-white/50 text-base md:text-lg max-w-xl mb-12">
+          Select an impact tier or set a custom amount. 100% of contributions directly fund hardware deployment.
         </p>
 
-        <!-- Donation Tiers -->
-        <div id="donation-section" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          <div class="donation-tier cube-container cube--md stagger-item" data-amount="25" style="height: 200px;">
+        <!-- Donation Tier Cubes -->
+        <div id="donation-section" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          <!-- Tier 1 -->
+          <div class="donation-tier cube-container cube--md" data-amount="25" style="height: 180px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-6 border border-glacial/10 flex flex-col justify-between h-full hover:border-glacial/30 transition-colors cursor-pointer">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em]">TIER 01</p>
+              <div class="cube-face cube-face--front glass rounded-2xl p-5 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/50 transition-all cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] font-mono">TIER 01</p>
                 <div>
                   <p class="text-3xl font-display font-bold text-glacial mb-1">$25</p>
-                  <p class="text-white/30 text-xs">1 Child / 1 Year</p>
+                  <p class="text-white/50 text-xs">1 Child / 1 Year</p>
                 </div>
+                <p class="t-label text-white/30 text-[8px]">CLICK TO SELECT</p>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-6 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="text-glacial text-3xl mb-2">💧</p>
-                <p class="text-white/60 text-sm leading-relaxed">Provides <strong class="text-glacial">1,500 liters</strong> of clean drinking water to one child for an entire year.</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-5 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="text-glacial text-2xl mb-1">💧</p>
+                <p class="text-white/70 text-xs leading-relaxed">Provides <strong class="text-glacial">1,500L</strong> of clean water to 1 child for 1 full year.</p>
               </div>
               <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
@@ -528,18 +542,20 @@
             </div>
           </div>
 
-          <div class="donation-tier cube-container cube--md stagger-item" data-amount="60" style="height: 200px;">
+          <!-- Tier 2 -->
+          <div class="donation-tier cube-container cube--md" data-amount="60" style="height: 180px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-6 border border-glacial/10 flex flex-col justify-between h-full hover:border-glacial/30 transition-colors cursor-pointer">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em]">TIER 02</p>
+              <div class="cube-face cube-face--front glass rounded-2xl p-5 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/50 transition-all cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] font-mono">TIER 02</p>
                 <div>
                   <p class="text-3xl font-display font-bold text-glacial mb-1">$60</p>
-                  <p class="text-white/30 text-xs">Family Water Kit</p>
+                  <p class="text-white/50 text-xs">Family Water Kit</p>
                 </div>
+                <p class="t-label text-white/30 text-[8px]">CLICK TO SELECT</p>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-6 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="text-glacial text-3xl mb-2">🏠</p>
-                <p class="text-white/60 text-sm leading-relaxed">Delivers a complete <strong class="text-glacial">family clean water kit</strong> with portable filtration and storage.</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-5 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="text-glacial text-2xl mb-1">🏠</p>
+                <p class="text-white/70 text-xs leading-relaxed">Delivers a complete <strong class="text-glacial">Family Filtration Kit</strong> with storage.</p>
               </div>
               <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
@@ -548,18 +564,20 @@
             </div>
           </div>
 
-          <div class="donation-tier cube-container cube--md stagger-item" data-amount="250" style="height: 200px;">
+          <!-- Tier 3 -->
+          <div class="donation-tier cube-container cube--md" data-amount="250" style="height: 180px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-6 border border-glacial/10 flex flex-col justify-between h-full hover:border-glacial/30 transition-colors cursor-pointer">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em]">TIER 03</p>
+              <div class="cube-face cube-face--front glass rounded-2xl p-5 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/50 transition-all cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] font-mono">TIER 03</p>
                 <div>
                   <p class="text-3xl font-display font-bold text-glacial mb-1">$250</p>
-                  <p class="text-white/30 text-xs">School Filtration Unit</p>
+                  <p class="text-white/50 text-xs">School Unit</p>
                 </div>
+                <p class="t-label text-white/30 text-[8px]">CLICK TO SELECT</p>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-6 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="text-glacial text-3xl mb-2">🏫</p>
-                <p class="text-white/60 text-sm leading-relaxed">Installs a <strong class="text-glacial">solar filtration unit</strong> at a school, serving 200+ students daily.</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-5 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="text-glacial text-2xl mb-1">🏫</p>
+                <p class="text-white/70 text-xs leading-relaxed">Funds a school solar unit serving <strong class="text-glacial">200+ students</strong> daily.</p>
               </div>
               <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
@@ -568,18 +586,20 @@
             </div>
           </div>
 
-          <div class="donation-tier cube-container cube--md stagger-item" data-amount="1500" style="height: 200px;">
+          <!-- Tier 4 -->
+          <div class="donation-tier cube-container cube--md" data-amount="1500" style="height: 180px;">
             <div class="cube-wrapper h-full">
-              <div class="cube-face cube-face--front glass rounded-2xl p-6 border border-glacial/10 flex flex-col justify-between h-full hover:border-glacial/30 transition-colors cursor-pointer">
-                <p class="t-label text-glacial text-[10px] tracking-[0.2em]">TIER 04</p>
+              <div class="cube-face cube-face--front glass rounded-2xl p-5 border border-glacial/20 flex flex-col justify-between h-full hover:border-glacial/50 transition-all cursor-pointer">
+                <p class="t-label text-glacial text-[10px] tracking-[0.2em] font-mono">TIER 04</p>
                 <div>
                   <p class="text-3xl font-display font-bold text-glacial mb-1">$1,500</p>
-                  <p class="text-white/30 text-xs">Community AWG</p>
+                  <p class="text-white/50 text-xs">Community AWG</p>
                 </div>
+                <p class="t-label text-white/30 text-[8px]">CLICK TO SELECT</p>
               </div>
-              <div class="cube-face cube-face--back glass rounded-2xl p-6 border border-glacial/20 flex flex-col justify-center items-center h-full text-center">
-                <p class="text-glacial text-3xl mb-2">🌍</p>
-                <p class="text-white/60 text-sm leading-relaxed">Funds a full <strong class="text-glacial">Atmospheric Water Generator</strong> serving an entire community of 500+ people.</p>
+              <div class="cube-face cube-face--back glass rounded-2xl p-5 border border-glacial/30 flex flex-col justify-center items-center h-full text-center cursor-pointer">
+                <p class="text-glacial text-2xl mb-1">🌍</p>
+                <p class="text-white/70 text-xs leading-relaxed">Funds a full generator serving an entire village of <strong class="text-glacial">500+ people</strong>.</p>
               </div>
               <div class="cube-face cube-face--top bg-glacial/10 rounded-2xl"></div>
               <div class="cube-face cube-face--bottom bg-obsidian rounded-2xl"></div>
@@ -589,35 +609,35 @@
           </div>
         </div>
 
-        <!-- Custom Amount Slider -->
-        <div class="stagger-item glass rounded-2xl p-8 border border-white/5 max-w-2xl mx-auto">
-          <p class="t-label text-glacial text-[10px] tracking-[0.2em] mb-6">CUSTOM CONTRIBUTION</p>
-          <div class="flex items-center gap-6 mb-6">
-            <span class="text-white/30 text-sm">$10</span>
-            <input id="donation-slider" type="range" min="10" max="5000" value="100" step="10" class="flex-1 h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#00e5ff]" />
-            <span class="text-white/30 text-sm">$5,000</span>
+        <!-- Custom Amount Slider Card (data-lenis-prevent prevents scroll conflicts) -->
+        <div class="glass rounded-2xl p-7 md:p-8 border border-white/10 max-w-2xl mx-auto mb-10" data-lenis-prevent>
+          <p class="t-label text-glacial text-xs tracking-[0.2em] mb-4 font-mono font-semibold">CUSTOM CONTRIBUTION SLIDER</p>
+          <div class="flex items-center gap-4 mb-6">
+            <span class="text-white/40 text-xs font-mono">$10</span>
+            <input id="donation-slider" type="range" min="10" max="5000" value="100" step="10" class="flex-1 h-2 bg-white/15 rounded-full appearance-none cursor-pointer" />
+            <span class="text-white/40 text-xs font-mono">$5,000</span>
           </div>
-          <div class="flex justify-between items-end">
+          <div class="grid grid-cols-3 gap-4 text-center sm:text-left">
             <div>
-              <p class="text-3xl font-display font-bold text-glacial" id="donation-amount">$100</p>
-              <p class="text-white/30 text-xs mt-1">Your Contribution</p>
+              <p class="text-2xl sm:text-3xl font-display font-bold text-glacial tabular-nums" id="donation-amount">$100</p>
+              <p class="text-white/40 text-[11px] mt-0.5">Your Contribution</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl sm:text-3xl font-display font-bold text-glacial tabular-nums" id="donation-liters">6,000L</p>
+              <p class="text-white/40 text-[11px] mt-0.5">Water Generated</p>
             </div>
             <div class="text-right">
-              <p class="text-2xl font-display font-bold text-glacial tabular-nums" id="donation-liters">6,000L</p>
-              <p class="text-white/30 text-xs mt-1">Clean Water Generated</p>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl font-display font-bold text-glacial tabular-nums" id="donation-people">48</p>
-              <p class="text-white/30 text-xs mt-1">People Served</p>
+              <p class="text-2xl sm:text-3xl font-display font-bold text-glacial tabular-nums" id="donation-people">48</p>
+              <p class="text-white/40 text-[11px] mt-0.5">People Sustained</p>
             </div>
           </div>
         </div>
 
         <!-- Simulated Live Donor Feed -->
-        <div class="mt-12 text-center">
-          <p class="t-label text-white/20 text-[9px] tracking-[0.3em] mb-4">RECENT CONTRIBUTIONS</p>
-          <div id="donor-feed" class="space-y-2 max-w-md mx-auto overflow-hidden" style="max-height: 120px;">
-            <!-- Dynamically populated -->
+        <div class="text-center max-w-md mx-auto">
+          <p class="t-label text-white/30 text-[9px] tracking-[0.3em] mb-3 font-mono">RECENT CONTRIBUTIONS</p>
+          <div id="donor-feed" class="space-y-2 w-full" style="min-height: 120px;">
+            <!-- Dynamically populated without height shifts -->
           </div>
         </div>
       </div>
@@ -626,26 +646,22 @@
     <!-- ─────────────────────────────────────────────────── -->
     <!-- FOOTER                                              -->
     <!-- ─────────────────────────────────────────────────── -->
-    <footer class="py-16 px-6 md:px-12 border-t border-white/5 relative z-20">
-      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer class="py-12 px-6 md:px-12 border-t border-white/10 relative z-20 bg-obsidian/60 backdrop-blur-md">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
         <div class="flex items-center gap-3">
-          <div class="w-6 h-6 rounded-full border border-glacial/30 flex items-center justify-center">
+          <div class="w-5 h-5 rounded-full border border-glacial/40 flex items-center justify-center">
             <div class="w-1.5 h-1.5 rounded-full bg-glacial"></div>
           </div>
-          <span class="t-label text-white/40 text-[10px] tracking-[0.2em]">AQUASOURCE // 01</span>
+          <span class="t-label text-white/60 text-[10px] tracking-[0.2em] font-mono">AQUASOURCE // 01</span>
         </div>
-        <p class="text-white/20 text-xs">A Portfolio Project — Engineering & Design by <span class="text-glacial/60">Michael</span></p>
+        <p class="text-white/40 text-xs">A Portfolio Showcase — Engineered by <span class="text-glacial font-semibold">Michael</span></p>
         <div class="flex gap-6">
-          <a href="#" class="t-label text-white/30 hover:text-glacial transition-colors text-[10px]">GITHUB</a>
-          <a href="#" class="t-label text-white/30 hover:text-glacial transition-colors text-[10px]">LINKEDIN</a>
+          <a href="https://github.com/Michael1221994/AQUASOURCE" target="_blank" rel="noopener noreferrer" class="t-label text-white/50 hover:text-glacial transition-colors text-[10px] font-mono">GITHUB REPO ↗</a>
         </div>
       </div>
     </footer>
 
   </main>
-
-  <!-- Dev Specs HUD Container -->
-  <div id="dev-specs-container"></div>
 
   <script type="module" src="/src/scripts/main.js"></script>
 </body>

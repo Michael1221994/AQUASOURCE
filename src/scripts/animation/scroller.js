@@ -19,20 +19,22 @@ export class SmoothScroller {
   init() {
     // Initialize Lenis smooth scroll
     this.lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.8,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.4,
     });
 
     // Connect Lenis to GSAP ScrollTrigger
     this.lenis.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
-      this.lenis.raf(time * 1000);
+      if (this.lenis) {
+        this.lenis.raf(time * 1000);
+      }
     });
 
     gsap.ticker.lagSmoothing(0);
@@ -44,77 +46,18 @@ export class SmoothScroller {
       this.onScrollCallbacks.forEach((cb) => cb(progress, velocity));
     });
 
-    this._setupChapterTriggers();
+    this._setupStatTriggers();
+    this._setupSceneIndicator();
   }
 
-  /**
-   * Register a callback to be called on each scroll update
-   */
   onScroll(callback) {
     this.onScrollCallbacks.push(callback);
   }
 
   /**
-   * Setup GSAP ScrollTrigger timelines for each chapter section
+   * Stat counter animations
    */
-  _setupChapterTriggers() {
-    // Reveal text elements as they enter the viewport
-    const revealElements = document.querySelectorAll('.reveal-text');
-    revealElements.forEach((el) => {
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
-        end: 'bottom 20%',
-        onEnter: () => el.classList.add('is-visible'),
-        onLeaveBack: () => el.classList.remove('is-visible'),
-      });
-    });
-
-    // Chapter-specific scroll-linked animations
-    const chapters = document.querySelectorAll('.chapter');
-    chapters.forEach((chapter, index) => {
-      // Fade in chapter content
-      const content = chapter.querySelector('.chapter-content');
-      if (!content) return;
-
-      gsap.fromTo(
-        content,
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: chapter,
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub: 0.5,
-          },
-        }
-      );
-
-      // Parallax background elements within chapters
-      const parallaxEls = chapter.querySelectorAll('.parallax');
-      parallaxEls.forEach((pEl) => {
-        gsap.fromTo(
-          pEl,
-          { y: 80 },
-          {
-            y: -80,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: chapter,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
-            },
-          }
-        );
-      });
-    });
-
-    // Stat counter animations
+  _setupStatTriggers() {
     const statNumbers = document.querySelectorAll('.stat-number');
     statNumbers.forEach((stat) => {
       const target = parseInt(stat.dataset.target, 10) || 0;
@@ -123,14 +66,14 @@ export class SmoothScroller {
 
       ScrollTrigger.create({
         trigger: stat,
-        start: 'top 80%',
+        start: 'top 85%',
         once: true,
         onEnter: () => {
           gsap.to(
             { val: 0 },
             {
               val: target,
-              duration: 2,
+              duration: 1.8,
               ease: 'power2.out',
               onUpdate: function () {
                 stat.textContent = prefix + Math.round(this.targets()[0].val).toLocaleString() + suffix;
@@ -140,9 +83,6 @@ export class SmoothScroller {
         },
       });
     });
-
-    // Scene navigation indicator update
-    this._setupSceneIndicator();
   }
 
   /**
@@ -150,11 +90,19 @@ export class SmoothScroller {
    */
   _setupSceneIndicator() {
     const indicators = document.querySelectorAll('.scene-indicator-dot');
-    const chapters = document.querySelectorAll('.chapter');
+    const sections = [
+      '#hero',
+      '#chapter-01',
+      '#chapter-02',
+      '#chapter-03',
+      '#mode-switch',
+      '#dispatches',
+      '#fund'
+    ].map(id => document.querySelector(id)).filter(Boolean);
 
-    chapters.forEach((chapter, index) => {
+    sections.forEach((section, index) => {
       ScrollTrigger.create({
-        trigger: chapter,
+        trigger: section,
         start: 'top center',
         end: 'bottom center',
         onEnter: () => this._setActiveIndicator(indicators, index),
@@ -170,11 +118,14 @@ export class SmoothScroller {
   }
 
   /**
-   * Scroll to a specific element
+   * Scroll to a specific element safely
    */
   scrollTo(target) {
     if (this.lenis) {
-      this.lenis.scrollTo(target, { duration: 1.6 });
+      this.lenis.scrollTo(target, { duration: 1.4, offset: -20 });
+    } else {
+      const el = typeof target === 'string' ? document.querySelector(target) : target;
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
