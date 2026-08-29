@@ -14,7 +14,6 @@ import { Transitions } from './animation/transitions.js';
 import { CubeManager } from './ui/cubeManager.js';
 import { ModeSwitcher } from './ui/modeSwitcher.js';
 import { DonationEngine } from './ui/donation.js';
-import { DevSpecs } from './ui/devSpecs.js';
 
 class AquasourceApp {
   constructor() {
@@ -24,7 +23,6 @@ class AquasourceApp {
     this.cubeManager = null;
     this.modeSwitcher = null;
     this.donationEngine = null;
-    this.devSpecs = null;
 
     this.mouse = { x: 0, y: 0 };
   }
@@ -77,12 +75,7 @@ class AquasourceApp {
       this.donationEngine.init();
       console.log('✓ Donation engine initialized');
 
-      // 7. Initialize Developer Specs HUD
-      this.devSpecs = new DevSpecs();
-      this.devSpecs.init(this.scene);
-      console.log('✓ Developer HUD initialized');
-
-      // 8. Global event listeners
+      // 7. Global event listeners
       this._setupEventListeners();
 
       console.log(

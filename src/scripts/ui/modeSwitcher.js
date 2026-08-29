@@ -17,18 +17,30 @@ export class ModeSwitcher {
 
     if (this.toggleEl) {
       this.toggleEl.addEventListener('click', () => this.toggleMode());
+      this.toggleEl.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        this.toggleMode();
+      }, { passive: false });
     }
 
     if (this.labelCrisis) {
       this.labelCrisis.addEventListener('click', () => {
         if (this.mode !== 0) this.toggleMode();
       });
+      this.labelCrisis.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        if (this.mode !== 0) this.toggleMode();
+      }, { passive: false });
     }
 
     if (this.labelImpact) {
       this.labelImpact.addEventListener('click', () => {
         if (this.mode !== 1) this.toggleMode();
       });
+      this.labelImpact.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        if (this.mode !== 1) this.toggleMode();
+      }, { passive: false });
     }
 
     this._applyMode();

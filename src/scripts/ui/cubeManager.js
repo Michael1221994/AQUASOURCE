@@ -11,6 +11,11 @@ export class CubeManager {
             cube.addEventListener('mousemove', (e) => this.onMouseMove(e, cube));
             cube.addEventListener('mouseleave', (e) => this.onMouseLeave(e, cube));
             cube.addEventListener('click', (e) => this.onClick(e, cube));
+            // Touch support for mobile
+            cube.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.onClick(e, cube);
+            }, { passive: false });
         });
     }
 
