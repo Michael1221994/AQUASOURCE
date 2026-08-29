@@ -119,13 +119,8 @@ class AquasourceApp {
       });
     });
 
-    // Mobile menu toggle
-    const mobileBtn = document.getElementById('mobile-menu-btn');
-    if (mobileBtn) {
-      mobileBtn.addEventListener('click', () => {
-        document.body.classList.toggle('mobile-nav-open');
-      });
-    }
+
+
   }
 }
 
